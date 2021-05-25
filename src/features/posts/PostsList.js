@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom'
 
 export function PostsList() {
   const posts = useSelector((state) => state.posts)
-  const renderedPosts = posts.map((post) => (
+  const orderedPosts = posts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
+
+  const renderedPosts = orderedPosts.map((post) => (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
       <p className="post-content">{post.content.substring(0, 100)}</p>
